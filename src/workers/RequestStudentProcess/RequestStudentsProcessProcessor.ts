@@ -1,8 +1,11 @@
 import { Job } from 'bullmq';
 import { queueProvider } from '../../app';
-import { students } from '../../data/StudentsData';
+import Students from '../../models/Students';
 
 const requestStudentsProcessProcessor =  async (job: Job) => {
+
+    const students = await Students.find({})
+
     for (const student of students) {
         console.log(`Request student ${student.name} process`);
 
