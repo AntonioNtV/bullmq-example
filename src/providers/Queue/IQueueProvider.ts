@@ -1,7 +1,10 @@
 interface addJobRequest {
     queueName: string
     jobName: string
-    job?: IStudentRequest
+    job?: IStudentRequest,
+    opts?: {
+        removeOnComplete: boolean
+    }
 }
 
 interface registerQueueRequest {
@@ -10,7 +13,7 @@ interface registerQueueRequest {
 
 interface IQueueProvider {
     register({ queueName }: registerQueueRequest): void
-    add({ queueName, job, jobName }: addJobRequest): void
+    add({ queueName, job, jobName, opts }: addJobRequest): void
     setUI(): void
 }
 

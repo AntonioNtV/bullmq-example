@@ -24,14 +24,16 @@ class BullQueueProvider implements IQueueProvider {
         this.queues.push(new Queue(queueName))
         this.queueSchedulers.push(new QueueScheduler(queueName))
     }
-    add({ queueName, job, jobName }: addJobRequest ): void {
+    add({ queueName, job, jobName, opts }: addJobRequest ): void {
         const queue = this.queues.find(q => q.name === queueName)
 
         if (!queue) {
             throw new Error('Queue dont exist')
         }
 
-        queue.add(jobName, job)
+        queue.add(jobName, job,{
+            removeOnComplete: opts?.removeOnComplete
+        })
     }
 
 }

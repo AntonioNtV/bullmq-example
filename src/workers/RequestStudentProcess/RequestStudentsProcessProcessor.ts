@@ -12,7 +12,10 @@ const requestStudentsProcessProcessor =  async (job: Job) => {
                 name: student.name
             },
             jobName: `${student.name} process request`,
-            queueName: 'student-processor'
+            queueName: 'student-processor',
+            opts: {
+                removeOnComplete: true
+            }
         })
     }
 }

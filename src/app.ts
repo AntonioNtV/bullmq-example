@@ -36,7 +36,10 @@ class App {
         cron.schedule('* * * * *', async () =>
             queueProvider.add({
                 jobName: 'request students process',
-                queueName: 'students-process-requester'
+                queueName: 'students-process-requester',
+                opts: {
+                    removeOnComplete: true
+                }
             })
         );
     }
