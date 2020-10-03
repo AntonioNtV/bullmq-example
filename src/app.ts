@@ -3,9 +3,10 @@ import { BullQueueProvider } from './providers/Queue/implementations/BullQueuePr
 import { IQueueProvider } from './providers/Queue/IQueueProvider';
 import routes from './routes/index';
 import cron from 'node-cron'
-import { requestStudentsProcessWorker } from './workers/RequestStudentProcess/RequestStudentsProcessWorker';
-import { processStudentWorker } from './workers/ProcessStudent/ProcessStudentWorker';
 import { router } from 'bull-board';
+import RequestStudentsProcessProcessor from './workers/RequestStudentProcess/RequestStudentsProcessProcessor';
+import { Worker } from 'bullmq';
+import ProcessStudentProcessor from './workers/ProcessStudent/ProcessStudentProcessor';
 
 class App {
     public express: express.Application;
@@ -52,8 +53,8 @@ class App {
     }
 
     private workers(): void {
-        requestStudentsProcessWorker
-        processStudentWorker
+        new Worker('students-process-requester', RequestStudentsProcessProcessor)
+        new Worker('student-processor', ProcessStudentProcessor)
     }
 
     private routes(): void {
