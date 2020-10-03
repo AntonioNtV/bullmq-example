@@ -65,7 +65,7 @@ class App {
 
     private async database(): Promise<void> {
         await mongoose.connect(
-            'mongodb+srv://buzzmonitor-analytics-development:ynaNtlxD6Rpk85l3@cluster0.xi3uc.mongodb.net/bulltest',
+            'mongodb+srv://PUT_YOUR_USER_HERE:PUT_YOUR_PASSWORD_HERE@PUT_YOUR_HOST_HERE/PUT_YOUR_DATABASE_HERE',
             {
               useNewUrlParser: true,
               useUnifiedTopology: true,
