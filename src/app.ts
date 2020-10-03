@@ -7,6 +7,8 @@ import { router } from 'bull-board';
 import RequestStudentsProcessProcessor from './workers/RequestStudentProcess/RequestStudentsProcessProcessor';
 import { Worker } from 'bullmq';
 import ProcessStudentProcessor from './workers/ProcessStudent/ProcessStudentProcessor';
+import mongoose from 'mongoose';
+import Students from './models/Students';
 
 class App {
     public express: express.Application;
@@ -61,8 +63,38 @@ class App {
         this.express.use(routes);
     }
 
-    private database(): void {
-        console.log('conecting to database');
+    private async database(): Promise<void> {
+        await mongoose.connect(
+            'mongodb+srv://buzzmonitor-analytics-development:ynaNtlxD6Rpk85l3@cluster0.xi3uc.mongodb.net/bulltest',
+            {
+              useNewUrlParser: true,
+              useUnifiedTopology: true,
+              useCreateIndex: true
+            }
+        )
+
+        mongoose.connection.on('conected', () => console.log('Database connected'))
+    }
+
+    private async insertUsers(): Promise<void> {
+        await Students.create({
+            description: 'Software Engineer',
+            name: 'Antonio',
+            surname: 'Bertino'
+        })
+
+        await Students.create({
+            description: 'Frontend Developer',
+            name: 'Natália',
+            surname: 'Salvino'
+        })
+
+        await Students.create( {
+            description: 'FullStack Developer',
+            name: 'Davi',
+            surname: 'Sousa'
+        })
+
     }
 }
 
