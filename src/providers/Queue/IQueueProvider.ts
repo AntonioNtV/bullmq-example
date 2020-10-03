@@ -1,7 +1,7 @@
 interface addJobRequest {
     queueName: string
     jobName: string
-    job: IStudentRequest
+    job?: IStudentRequest
 }
 
 interface registerQueueRequest {
@@ -11,6 +11,7 @@ interface registerQueueRequest {
 interface IQueueProvider {
     register({ queueName }: registerQueueRequest): void
     add({ queueName, job, jobName }: addJobRequest): void
+    setUI(): void
 }
 
 export { IQueueProvider, addJobRequest, registerQueueRequest }
