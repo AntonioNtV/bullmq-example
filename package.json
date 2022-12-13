@@ -6,7 +6,7 @@
   "dependencies": {
     "bull-board": "alpha",
     "bullmq": "^1.9.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "mongoose": "^5.10.7",
     "node-cron": "^2.0.3"
   },
